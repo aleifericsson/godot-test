@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1mncet80y0pl"]
+[gd_scene load_steps=7 format=3 uid="uid://d1mncet80y0pl"]
 
 [ext_resource type="PackedScene" uid="uid://x7kfrfawnl4a" path="res://models/baebleyd.glb" id="1_7efx1"]
+[ext_resource type="Script" path="res://scripts/spin.cs" id="1_l4q1q"]
+[ext_resource type="Script" path="res://scripts/CamControl.cs" id="1_sa4bc"]
 [ext_resource type="PackedScene" uid="uid://pyb7ejm87y0h" path="res://models/untitled.glb" id="2_vifuh"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ua6vg"]
@@ -17,15 +19,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 [node name="Camera3D" type="Camera3D" parent="my_camera"]
 transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 1.25744, -1.6927)
 fov = 90.0
+script = ExtResource("1_sa4bc")
 
-[node name="beybaeld" type="RigidBody3D" parent="."]
-transform = Transform3D(0.79653, 0, 0.604599, 0, 1, 0, -0.604599, 0, 0.79653, 0.504737, 0, -2.02608)
+[node name="beyblade" type="RigidBody3D" parent="."]
+transform = Transform3D(0.79653, 0.129829, 0.590495, 0, 0.976672, -0.214735, -0.604599, 0.171043, 0.777949, 1.00233, 0.205186, -2.02608)
+script = ExtResource("1_l4q1q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="beybaeld"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="beyblade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CylinderShape3D_ua6vg")
 
-[node name="baebleyd" parent="beybaeld" instance=ExtResource("1_7efx1")]
+[node name="baebleyd" parent="beyblade" instance=ExtResource("1_7efx1")]
 transform = Transform3D(0.05, 0, 1.86265e-09, 0, 0.05, 0, -1.86265e-09, 0, 0.05, 0, 0, 0)
 
 [node name="floor" type="StaticBody3D" parent="."]
@@ -42,6 +46,14 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "HELPPPP IM IN YOURS WALLS"
 
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 24.0
+offset_right = 271.0
+offset_bottom = 47.0
+text = "rotation?"
+
 [node name="the_source" type="SpotLight3D" parent="."]
 transform = Transform3D(-0.345298, -0.437701, 0.830173, 0, 0.884581, 0.466387, -0.938493, 0.161042, -0.305444, 6.64302, 1.67256, -2.85826)
 spot_angle = 44.75
@@ -49,3 +61,11 @@ spot_angle = 44.75
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.46793, 0, 0.883766, 0, 1, 0, -0.883766, 0, 0.46793, -2.1378, 0.117321, -1.44654)
 text = "Im in 3d i cannot comprehend this helpp"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+offset_left = 3.0
+offset_top = 24.0
+offset_right = 47.0
+offset_bottom = 48.0
+
+[connection signal="toggled" from="CheckButton" to="beyblade" method="_on_check_button_toggled"]

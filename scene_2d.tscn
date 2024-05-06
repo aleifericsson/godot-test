@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://brjk0n3cmbxi6"]
+
+[ext_resource type="Texture2D" uid="uid://4r0tixj6t3x1" path="res://images/blaze.png" id="1_e2q7d"]
+[ext_resource type="Script" path="res://scripts/blaze.cs" id="2_8b0b6"]
+[ext_resource type="Script" path="res://scripts/spin_the_cat.cs" id="3_osfsl"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="blaze" type="Sprite2D" parent="."]
+position = Vector2(282, 238)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_e2q7d")
+script = ExtResource("2_8b0b6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 475.0
+offset_top = 32.0
+offset_right = 647.0
+offset_bottom = 55.0
+text = "i love blaze from sonic"
+
+[node name="spin_the_cat" type="Button" parent="."]
+offset_left = 498.0
+offset_top = 61.0
+offset_right = 596.0
+offset_bottom = 92.0
+text = "spin the cat"
+script = ExtResource("3_osfsl")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="SpinComplete" from="blaze" to="spin_the_cat" method="_on_blaze_spin_complete"]
+[connection signal="pressed" from="spin_the_cat" to="blaze" method="_on_button_pressed"]
